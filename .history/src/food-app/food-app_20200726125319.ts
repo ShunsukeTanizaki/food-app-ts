@@ -1,0 +1,2 @@
+
+const foods = Foods.getInstance();
