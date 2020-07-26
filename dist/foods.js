@@ -1,15 +1,4 @@
 "use strict";
-class Food {
-    constructor(element) {
-        this.element = element;
-        element.addEventListener('click', this.clickEventHandler.bind(this));
-    }
-    clickEventHandler() {
-        this.element.classList.toggle('food--active');
-        const score = Score.getInstance();
-        score.render();
-    }
-}
 class Foods {
     constructor() {
         this.elements = document.querySelectorAll('.food');
@@ -45,4 +34,3 @@ class Foods {
         return Foods.instance;
     }
 }
-const foods = Foods.getInstance();

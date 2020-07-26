@@ -1,24 +1,10 @@
-"use strict";
-class Food {
-    constructor(element) {
-        this.element = element;
-        element.addEventListener('click', this.clickEventHandler.bind(this));
-    }
-    clickEventHandler() {
-        this.element.classList.toggle('food--active');
-        const score = Score.getInstance();
-        score.render();
-    }
-}
-class Foods {
-    constructor() {
-        this.elements = document.querySelectorAll('.food');
-        this._activeElements = [];
-        this._activeElementsScore = [];
-        this.elements.forEach(element => {
-            new Food(element);
-        });
-    }
+
+
+class Foods implements Foodsable {
+    private static instance: Foods;
+    elements = document.querySelectorAll<HTMLDivElement>('.food');
+    private _activeElements: HTMLDivElement[] = [];
+    private _activeElementsScore: number[] = [];
     get activeElements() {
         this._activeElements = [];
         this.elements.forEach(element => {
@@ -35,8 +21,13 @@ class Foods {
             if (foodScore) {
                 this._activeElementsScore.push(Number(foodScore.textContent));
             }
-        });
+        })
         return this._activeElementsScore;
+    }
+    private constructor() {
+        this.elements.forEach(element => {
+            new Food(element); 
+        })
     }
     static getInstance() {
         if (!Foods.instance) {
