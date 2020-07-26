@@ -1,2 +1,0 @@
-
-const foods = Foods.getInstance();
